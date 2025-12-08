@@ -125,7 +125,16 @@
                         <p>Fill out the form below and we'll get back to you within 24 hours.</p>
                     </div>
                     
-                    <form class="contact-form" id="contactForm">
+                    <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                        <!-- Web3Forms Access Key - Get yours free at https://web3forms.com -->
+                        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                        <!-- Form Configuration -->
+                        <input type="hidden" name="subject" value="New Contact Form Submission - Wyndham Financial Group">
+                        <input type="hidden" name="from_name" value="Wyndham Financial Group Website">
+                        <input type="hidden" name="redirect" value="https://web3forms.com/success">
+                        <!-- Honeypot Spam Protection -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name *</label>
@@ -235,7 +244,7 @@
                         <ul class="sidebar-features">
                             <li>
                                 <i class="fas fa-check-circle"></i>
-                                <span>Free service - we're paid by lenders</span>
+                                <span>No cost to you - paid by lenders</span>
                             </li>
                             <li>
                                 <i class="fas fa-check-circle"></i>
@@ -335,11 +344,11 @@
             <div class="faq-grid">
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Is your service really free?</span>
+                        <span>Is there any cost to use your service?</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p>Yes! Our service is completely free to you. We are paid by the lender when your loan settles, so there's no cost to you for our expert advice and support.</p>
+                        <p>There is no cost to you for using our service. We are paid by the lender when your loan settles, so you get expert advice and support at no charge.</p>
                     </div>
                 </div>
                 
@@ -503,6 +512,51 @@
                 }
             });
         });
+
+        // Contact Form Submission Handler
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                // Show loading state
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.disabled = true;
+                
+                try {
+                    const formData = new FormData(contactForm);
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        // Show success message
+                        contactForm.innerHTML = `
+                            <div class="form-success">
+                                <i class="fas fa-check-circle"></i>
+                                <h3>Thank You!</h3>
+                                <p>Your message has been sent successfully. We'll get back to you within 24 hours.</p>
+                                <a href="index.html" class="btn btn-primary">Back to Home</a>
+                            </div>
+                        `;
+                    } else {
+                        throw new Error(result.message || 'Something went wrong');
+                    }
+                } catch (error) {
+                    // Show error message
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    alert('Oops! There was a problem sending your message. Please try again or call us directly at 0426 711 717.');
+                    console.error('Form submission error:', error);
+                }
+            });
+        }
     </script>
 </body>
 </html>
