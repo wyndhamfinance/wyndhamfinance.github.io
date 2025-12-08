@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Calculators | Wyndham Financial Group</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+    <link rel="apple-touch-icon" href="logo.jpeg">
+    <meta name="description" content="Use our free mortgage calculators to estimate your borrowing capacity, loan repayments, stamp duty, and more. Plan your financial future with Wyndham Financial Group.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="logo.jpeg" alt="Wyndham Financial Group Logo">
+                </a>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="dropdown">
+                        <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services.html#home-loans">Home Loans</a></li>
+                            <li><a href="services.html#investment-loans">Investment Loans</a></li>
+                            <li><a href="services.html#commercial-loans">Commercial Loans</a></li>
+                            <li><a href="services.html#construction-loans">Construction Loans</a></li>
+                            <li><a href="services.html#bridging-loans">Bridging & Specialty Loans</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="calculators.html" class="nav-link active">Calculators</a></li>
+                    <li><a href="index.html#reviews" class="nav-link">Reviews</a></li>
+                    <li><a href="contact.html" class="nav-link active-orange">Contact Us</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="tel:0426711717" class="phone-btn">
+                        <i class="fas fa-phone"></i> 0426 711 717
+                    </a>
+                </div>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-overlay"></div>
+        <div class="container">
+            <div class="page-hero-content">
+                <span class="section-tag light">FINANCIAL TOOLS</span>
+                <h1>Mortgage Calculators</h1>
+                <p>Use our free calculators to help plan your financial future and make informed decisions</p>
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Calculators</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculators Section -->
+    <section class="calculators-section">
+        <div class="container">
+            <div class="calculators-grid">
+                
+                <!-- Borrowing Capacity Calculator -->
+                <div class="calculator-card" id="borrowing-calculator">
+                    <div class="calculator-header">
+                        <div class="calc-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h2>Borrowing Capacity Calculator</h2>
+                        <p>Find out how much you may be able to borrow based on your income and expenses</p>
+                    </div>
+                    <div class="calculator-body">
+                        <form class="calc-form" id="borrowingForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Annual Income (Before Tax)</label>
+                                    <div class="input-icon">
+                                        <span>$</span>
+                                        <input type="number" id="annualIncome" placeholder="100,000" value="100000">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Partner's Annual Income</label>
+                                    <div class="input-icon">
+                                        <span>$</span>
+                                        <input type="number" id="partnerIncome" placeholder="0" value="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Monthly Living Expenses</label>
+                                    <div class="input-icon">
+                                        <span>$</span>
+                                        <input type="number" id="monthlyExpenses" placeholder="3,000" value="3000">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Existing Loan Repayments (Monthly)</label>
+                                    <div class="input-icon">
+                                        <span>$</span>
+                                        <input type="number" id="existingLoans" placeholder="0" value="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Number of Dependents</label>
+                                    <select id="dependents">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4+</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Interest Rate (%)</label>
+                                    <div class="input-icon">
+                                        <span>%</span>
+                                        <input type="number" id="interestRate" placeholder="6.5" value="6.5" step="0.1">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-full" onclick="calculateBorrowing()">
+                                Calculate Borrowing Capacity <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </form>
+                        <div class="calc-result" id="borrowingResult" style="display: none;">
+                            <div class="result-box">
+                                <span class="result-label">Estimated Borrowing Capacity</span>
+                                <span class="result-value" id="borrowingValue">$0</span>
+                                <span class="result-note">*This is an estimate only. Contact us for an accurate assessment.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loan Repayment Calculator -->
+                <div class="calculator-card" id="repayment-calculator">
+                    <div class="calculator-header">
+                        <div class="calc-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h2>Loan Repayment Calculator</h2>
+                        <p>Calculate your estimated monthly repayments for your home loan</p>
+                    </div>
+                    <div class="calculator-body">
+                        <form class="calc-form" id="repaymentForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Loan Amount</label>
+                                    <div class="input-icon">
+                                        <span>$</span>
+                                        <input type="number" id="loanAmount" placeholder="500,000" value="500000">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Loan Term (Years)</label>
+                                    <select id="loanTerm">
+                                        <option value="10">10 years</option>
+                                        <option value="15">15 years</option>
+                                        <option value="20">20 years</option>
+                                        <option value="25">25 years</option>
+                                        <option value="30" selected>30 years</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Interest Rate (%)</label>
+                                    <div class="input-icon">
+                                        <span>%</span>
+                                        <input type="number" id="repaymentRate" placeholder="6.5" value="6.5" step="0.1">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Repayment Type</label>
+                                    <select id="repaymentType">
+                                        <option value="pi">Principal & Interest</option>
+                                        <option value="io">Interest Only</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-full" onclick="calculateRepayment()">
+                                Calculate Repayments <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </form>
+                        <div class="calc-result" id="repaymentResult" style="display: none;">
+                            <div class="result-grid">
+                                <div class="result-box">
+                                    <span class="result-label">Monthly Repayment</span>
+                                    <span class="result-value" id="monthlyRepayment">$0</span>
+                                </div>
+                                <div class="result-box">
+                                    <span class="result-label">Fortnightly Repayment</span>
+                                    <span class="result-value small" id="fortnightlyRepayment">$0</span>
+                                </div>
+                                <div class="result-box">
+                                    <span class="result-label">Weekly Repayment</span>
+                                    <span class="result-value small" id="weeklyRepayment">$0</span>
+                                </div>
+                                <div class="result-box">
+                                    <span class="result-label">Total Interest Paid</span>
+                                    <span class="result-value small" id="totalInterest">$0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stamp Duty Calculator -->
+                <div class="calculator-card" id="stamp-duty-calculator">
+                    <div class="calculator-header">
+                        <div class="calc-icon">
+                            <i class="fas fa-stamp"></i>
+                        </div>
+                        <h2>Stamp Duty Calculator</h2>
+                        <p>Estimate the stamp duty payable on your property purchase</p>
+                    </div>
+                    <div class="calculator-body">
+                        <form class="calc-form" id="stampDutyForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Property Value</label>
+                                    <div class="input-icon">
+                                        <span>$</span>
+                                        <input type="number" id="propertyValue" placeholder="750,000" value="750000">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>State/Territory</label>
+                                    <select id="state">
+                                        <option value="VIC" selected>Victoria</option>
+                                        <option value="NSW">New South Wales</option>
+                                        <option value="QLD">Queensland</option>
+                                        <option value="WA">Western Australia</option>
+                                        <option value="SA">South Australia</option>
+                                        <option value="TAS">Tasmania</option>
+                                        <option value="ACT">ACT</option>
+                                        <option value="NT">Northern Territory</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Buyer Type</label>
+                                    <select id="buyerType">
+                                        <option value="standard">Standard Buyer</option>
+                                        <option value="fhb">First Home Buyer</option>
+                                        <option value="investor">Investor</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Property Type</label>
+                                    <select id="propertyType">
+                                        <option value="established">Established Home</option>
+                                        <option value="new">New Home</option>
+                                        <option value="land">Vacant Land</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-full" onclick="calculateStampDuty()">
+                                Calculate Stamp Duty <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </form>
+                        <div class="calc-result" id="stampDutyResult" style="display: none;">
+                            <div class="result-grid">
+                                <div class="result-box">
+                                    <span class="result-label">Estimated Stamp Duty</span>
+                                    <span class="result-value" id="stampDutyValue">$0</span>
+                                </div>
+                                <div class="result-box">
+                                    <span class="result-label">Transfer Fee</span>
+                                    <span class="result-value small" id="transferFee">$0</span>
+                                </div>
+                            </div>
+                            <span class="result-note">*Rates are estimates and may vary. First home buyer concessions may apply.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extra Repayment Calculator -->
+                <div class="calculator-card" id="extra-repayment-calculator">
+                    <div class="calculator-header">
+                        <div class="calc-icon">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <h2>Extra Repayment Calculator</h2>
+                        <p>See how much time and money you can save by making extra repayments</p>
+                    </div>
+                    <div class="calculator-body">
+                        <form class="calc-form" id="extraRepaymentForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Current Loan Balance</label>
+                                    <div class="input-icon">
+                                        <span>$</span>
+                                        <input type="number" id="currentBalance" placeholder="400,000" value="400000">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Remaining Loan Term (Years)</label>
+                                    <select id="remainingTerm">
+                                        <option value="5">5 years</option>
+                                        <option value="10">10 years</option>
+                                        <option value="15">15 years</option>
+                                        <option value="20">20 years</option>
+                                        <option value="25" selected>25 years</option>
+                                        <option value="30">30 years</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Current Interest Rate (%)</label>
+                                    <div class="input-icon">
+                                        <span>%</span>
+                                        <input type="number" id="currentRate" placeholder="6.5" value="6.5" step="0.1">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Extra Monthly Payment</label>
+                                    <div class="input-icon">
+                                        <span>$</span>
+                                        <input type="number" id="extraPayment" placeholder="500" value="500">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-full" onclick="calculateExtraRepayment()">
+                                Calculate Savings <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </form>
+                        <div class="calc-result" id="extraRepaymentResult" style="display: none;">
+                            <div class="result-grid">
+                                <div class="result-box highlight">
+                                    <span class="result-label">Interest Saved</span>
+                                    <span class="result-value" id="interestSaved">$0</span>
+                                </div>
+                                <div class="result-box highlight">
+                                    <span class="result-label">Time Saved</span>
+                                    <span class="result-value" id="timeSaved">0 years</span>
+                                </div>
+                                <div class="result-box">
+                                    <span class="result-label">New Loan Term</span>
+                                    <span class="result-value small" id="newLoanTerm">0 years</span>
+                                </div>
+                                <div class="result-box">
+                                    <span class="result-label">New Monthly Payment</span>
+                                    <span class="result-value small" id="newMonthlyPayment">$0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Need Help Understanding Your Options?</h2>
+                <p>Our expert mortgage brokers can help you navigate through the numbers and find the best loan for your situation.</p>
+                <div class="cta-buttons">
+                    <a href="tel:0426711717" class="btn btn-outline">
+                        <i class="fas fa-phone"></i> Call 0426 711 717
+                    </a>
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-alt"></i> Book a Consultation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="logo.jpeg" alt="Wyndham Financial Group" class="footer-logo">
+                    <p>Wyndham Financial Group is committed to delivering outstanding financial services to its valued clients. Transform your dreams of homeownership into reality.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/p/Wyndham-Financial-Group-61551785338919/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://brokerpages.com.au/mortgage-broker/gurlal-singh/" target="_blank"><i class="fas fa-user-tie"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="calculators.html">Calculators</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Calculators</h4>
+                    <ul>
+                        <li><a href="calculators.html#borrowing-calculator">Borrowing Capacity</a></li>
+                        <li><a href="calculators.html#repayment-calculator">Loan Repayments</a></li>
+                        <li><a href="calculators.html#stamp-duty-calculator">Stamp Duty</a></li>
+                        <li><a href="calculators.html#extra-repayment-calculator">Extra Repayments</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>
+                            <i class="fas fa-user"></i>
+                            <span>Gurlal Singh</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:0426711717">0426 711 717</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:gurlal@wyndhamfinancialgroup.com.au">gurlal@wyndhamfinancialgroup.com.au</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Truganina, VIC, Australia</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Wyndham Financial Group. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="calculators.js"></script>
+</body>
+</html>

@@ -292,6 +292,51 @@ img {
     transform: translateY(-2px);
 }
 
+/* Nav Right Container */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Nav Item */
+.nav-item {
+    position: relative;
+}
+
+.nav-item.dropdown {
+    position: relative;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Contact Link Button Style */
+.contact-link {
+    background: var(--primary-color);
+    color: #ffffff !important;
+    padding: 10px 20px !important;
+    border-radius: 50px;
+}
+
+.contact-link:hover {
+    background: var(--primary-dark);
+    color: #ffffff !important;
+}
+
+/* Hamburger Bar Styles */
+.hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background: var(--text-dark);
+    border-radius: 3px;
+    transition: var(--transition);
+    display: block;
+}
+
 /* Hamburger Menu */
 .hamburger {
     display: none;

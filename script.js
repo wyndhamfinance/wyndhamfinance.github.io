@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     // DARK MODE TOGGLE
     // ==========================================
-    const themeToggle = document.getElementById('themeToggle');
+    const themeToggle = document.getElementById('theme-toggle') || document.getElementById('themeToggle');
     const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
     
     // Check for saved theme preference or default to light

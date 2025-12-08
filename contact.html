@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Wyndham Financial Group - Melbourne Mortgage Broker</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+    <link rel="apple-touch-icon" href="logo.jpeg">
+    <meta name="description" content="Get in touch with Wyndham Financial Group. Contact Gurlal Singh for expert mortgage advice. Call 0426 711 717 or book a free consultation today.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="logo.jpeg" alt="Wyndham Financial Group Logo">
+                </a>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="dropdown">
+                        <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services.html#home-loans">Home Loans</a></li>
+                            <li><a href="services.html#investment-loans">Investment Loans</a></li>
+                            <li><a href="services.html#commercial-loans">Commercial Loans</a></li>
+                            <li><a href="services.html#construction-loans">Construction Loans</a></li>
+                            <li><a href="services.html#bridging-loans">Bridging Loans</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="calculators.html" class="nav-link">Calculators</a></li>
+                    <li><a href="index.html#reviews" class="nav-link">Reviews</a></li>
+                    <li><a href="contact.html" class="nav-link active active-orange">Contact Us</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="tel:0426711717" class="phone-btn">
+                        <i class="fas fa-phone"></i> 0426 711 717
+                    </a>
+                </div>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero contact-hero">
+        <div class="page-hero-overlay"></div>
+        <div class="container">
+            <div class="page-hero-content">
+                <span class="section-tag light">GET IN TOUCH</span>
+                <h1>Contact Us</h1>
+                <p>We're here to help you achieve your property dreams. Reach out today!</p>
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Contact</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info Cards -->
+    <section class="contact-info-section">
+        <div class="container">
+            <div class="contact-info-grid">
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p>Speak directly with our expert broker</p>
+                    <a href="tel:0426711717" class="contact-link">0426 711 717</a>
+                </div>
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p>Send us your enquiry anytime</p>
+                    <a href="mailto:gurlal@wyndhamfinancialgroup.com.au" class="contact-link">gurlal@wyndhamfinancialgroup.com.au</a>
+                </div>
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Visit Us</h3>
+                    <p>Melbourne, Victoria</p>
+                    <span class="contact-link">Truganina, VIC, Australia</span>
+                </div>
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Business Hours</h3>
+                    <p>Flexible appointment times</p>
+                    <span class="contact-link">Mon - Sat: 9am - 7pm</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Contact Section -->
+    <section class="contact-main-section">
+        <div class="container">
+            <div class="contact-main-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper">
+                    <div class="form-header">
+                        <span class="section-tag">SEND A MESSAGE</span>
+                        <h2>Book a Free Consultation</h2>
+                        <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+                    </div>
+                    
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" placeholder="0400 000 000" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="serviceType">What are you looking for?</label>
+                            <select id="serviceType" name="serviceType">
+                                <option value="">Select a service...</option>
+                                <option value="home-loan">Home Loan</option>
+                                <option value="first-home">First Home Buyer</option>
+                                <option value="refinance">Refinancing</option>
+                                <option value="investment">Investment Property Loan</option>
+                                <option value="commercial">Commercial/Business Loan</option>
+                                <option value="construction">Construction Loan</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loanAmount">Estimated Loan Amount</label>
+                            <select id="loanAmount" name="loanAmount">
+                                <option value="">Select range...</option>
+                                <option value="under-300k">Under $300,000</option>
+                                <option value="300k-500k">$300,000 - $500,000</option>
+                                <option value="500k-750k">$500,000 - $750,000</option>
+                                <option value="750k-1m">$750,000 - $1,000,000</option>
+                                <option value="1m-2m">$1,000,000 - $2,000,000</option>
+                                <option value="over-2m">Over $2,000,000</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Tell us about your situation</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Share any details that will help us understand your needs..."></textarea>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="consent" required>
+                                <span>I agree to be contacted by Wyndham Financial Group regarding my enquiry</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                        
+                        <p class="form-note">
+                            <i class="fas fa-lock"></i> Your information is secure and will never be shared with third parties.
+                        </p>
+                    </form>
+                </div>
+                
+                <!-- Contact Sidebar -->
+                <div class="contact-sidebar-content">
+                    <!-- Quick Contact -->
+                    <div class="sidebar-card">
+                        <h3>Prefer to Talk?</h3>
+                        <p>Sometimes a quick phone call is the easiest way. Give us a ring and let's chat about your needs.</p>
+                        <a href="tel:0426711717" class="btn btn-primary btn-full">
+                            <i class="fas fa-phone"></i> Call Now
+                        </a>
+                    </div>
+                    
+                    <!-- Meet Your Broker -->
+                    <div class="sidebar-card broker-card">
+                        <div class="broker-image">
+                            <img src="profile.jpeg" alt="Gurlal Singh">
+                        </div>
+                        <div class="broker-info">
+                            <h4>Gurlal Singh</h4>
+                            <p>Principal Mortgage Broker</p>
+                            <div class="broker-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>5.0 (47 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Why Contact Us -->
+                    <div class="sidebar-card features-card">
+                        <h3>Why Choose Us?</h3>
+                        <ul class="sidebar-features">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Free service - we're paid by lenders</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Access to 50+ lenders</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Fast approvals</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Flexible meeting times</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>We come to you</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="sidebar-card social-card">
+                        <h3>Connect With Us</h3>
+                        <div class="sidebar-social">
+                            <a href="https://www.facebook.com/p/Wyndham-Financial-Group-61551785338919/" target="_blank" class="social-link facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://brokerpages.com.au/mortgage-broker/gurlal-singh/" target="_blank" class="social-link broker">
+                                <i class="fas fa-user-tie"></i>
+                            </a>
+                            <a href="#" class="social-link linkedin">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-link instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">LOCATION</span>
+                <h2>Areas We Service</h2>
+                <p>Proudly serving Melbourne's western suburbs and beyond</p>
+            </div>
+        </div>
+        <div class="map-wrapper">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50598.40917618699!2d144.6892376!3d-37.8284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad68fb22a7f7577%3A0x5045675218ccd90!2sTruganina%20VIC%203029!5e0!3m2!1sen!2sau!4v1699999999999!5m2!1sen!2sau" 
+                width="100%" 
+                height="450" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        <div class="container">
+            <div class="service-areas">
+                <h3>We Proudly Service:</h3>
+                <div class="areas-tags">
+                    <span class="area-tag">Truganina</span>
+                    <span class="area-tag">Point Cook</span>
+                    <span class="area-tag">Werribee</span>
+                    <span class="area-tag">Tarneit</span>
+                    <span class="area-tag">Hoppers Crossing</span>
+                    <span class="area-tag">Williams Landing</span>
+                    <span class="area-tag">Wyndham Vale</span>
+                    <span class="area-tag">Laverton</span>
+                    <span class="area-tag">Altona</span>
+                    <span class="area-tag">Caroline Springs</span>
+                    <span class="area-tag">Melton</span>
+                    <span class="area-tag">Sunshine</span>
+                    <span class="area-tag">Footscray</span>
+                    <span class="area-tag">Melbourne CBD</span>
+                    <span class="area-tag">Greater Melbourne</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FAQ</span>
+                <h2>Common Questions</h2>
+                <p>Quick answers to help you get started</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is your service really free?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! Our service is completely free to you. We are paid by the lender when your loan settles, so there's no cost to you for our expert advice and support.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How long does the loan process take?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Typically, from application to approval takes 3-5 business days for straightforward applications. The total process from initial consultation to settlement is usually 4-6 weeks, depending on the complexity of your situation.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What documents do I need?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Generally, you'll need: proof of identity (driver's license, passport), recent payslips, tax returns, bank statements, and details of any existing debts. We'll provide you with a complete checklist during your consultation.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can you help with bad credit?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we work with a variety of lenders, including those who specialize in helping clients with less-than-perfect credit histories. We'll assess your situation and find suitable options for you.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do you offer after-hours appointments?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely! We understand that you're busy, so we offer flexible appointment times including evenings and weekends. We can also meet at your home or office for your convenience.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How many lenders do you work with?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We have access to over 50 lenders, including major banks, credit unions, and non-bank lenders. This wide panel allows us to find competitive rates and products suited to your specific needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Take the Next Step?</h2>
+                <p>Whether you're buying your first home or refinancing, we're here to help. Get in touch today!</p>
+                <div class="cta-buttons">
+                    <a href="tel:0426711717" class="btn btn-outline">
+                        <i class="fas fa-phone"></i> Call 0426 711 717
+                    </a>
+                    <a href="calculators.html" class="btn btn-primary">
+                        <i class="fas fa-calculator"></i> Try Our Calculators
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="logo.jpeg" alt="Wyndham Financial Group" class="footer-logo">
+                    <p>Wyndham Financial Group is committed to delivering outstanding financial services to its valued clients. Transform your dreams of homeownership into reality.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/p/Wyndham-Financial-Group-61551785338919/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://brokerpages.com.au/mortgage-broker/gurlal-singh/" target="_blank"><i class="fas fa-user-tie"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="calculators.html">Calculators</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html#home-loans">Home Loans</a></li>
+                        <li><a href="services.html#investment-loans">Investment Loans</a></li>
+                        <li><a href="services.html#commercial-loans">Commercial Loans</a></li>
+                        <li><a href="services.html#construction-loans">Construction Loans</a></li>
+                        <li><a href="services.html#bridging-loans">Bridging Loans</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>
+                            <i class="fas fa-user"></i>
+                            <span>Gurlal Singh</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:0426711717">0426 711 717</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:gurlal@wyndhamfinancialgroup.com.au">gurlal@wyndhamfinancialgroup.com.au</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Truganina, VIC, Australia</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Wyndham Financial Group. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isOpen = faqItem.classList.contains('active');
+                
+                // Close all FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked FAQ if it wasn't already open
+                if (!isOpen) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
