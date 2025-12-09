@@ -85,6 +85,78 @@
     color: #ffffff;
 }
 
+/* Additional dark mode fixes for all text visibility */
+[data-theme="dark"] .hero h1,
+[data-theme="dark"] .hero-subtitle {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .hero h1 .highlight {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .about-content p,
+[data-theme="dark"] .service-card p,
+[data-theme="dark"] .tool-card p,
+[data-theme="dark"] .specialty-item p,
+[data-theme="dark"] .review-card p {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .service-list li {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .feature-item span {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .areas-section h4 {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .areas-section li {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .footer h4 {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .footer p,
+[data-theme="dark"] .footer li,
+[data-theme="dark"] .footer a {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .footer a:hover {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .contact-text h4 {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .rating-text {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .section-subtitle {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .lenders-note {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .section-header p {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .section-header h2 {
+    color: #ffffff;
+}
+
 /* Reset & Base */
 * {
     margin: 0;
@@ -1315,19 +1387,44 @@ section h2 {
     
     .nav-actions {
         display: flex;
-        order: 2;
-    }
-    
-    .hamburger {
-        order: 3;
+        align-items: center;
+        margin-left: auto;
+        gap: 10px;
     }
     
     .theme-toggle {
         margin-right: 0;
+        order: 0;
     }
     
     .navbar {
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .logo {
+        order: 0;
+    }
+    
+    .nav-menu {
+        order: 1;
+    }
+    
+    /* Mobile right side: theme toggle + hamburger */
+    .navbar > .nav-actions {
+        position: absolute;
+        right: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .navbar > .hamburger {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
     }
     
     .hero h1 {

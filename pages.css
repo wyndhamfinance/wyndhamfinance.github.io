@@ -4,6 +4,93 @@
    ========================================== */
 
 /* ==========================================
+   DARK MODE FIXES FOR PAGES
+   ========================================== */
+[data-theme="dark"] .calculator-header h2,
+[data-theme="dark"] .calc-form label,
+[data-theme="dark"] .result-label,
+[data-theme="dark"] .service-detail-content h2,
+[data-theme="dark"] .overview-content h2,
+[data-theme="dark"] .stat-item .stat-label,
+[data-theme="dark"] .about-story-content h2,
+[data-theme="dark"] .about-story-content .lead,
+[data-theme="dark"] .story-quote p,
+[data-theme="dark"] .team-featured-content h3,
+[data-theme="dark"] .value-card h3,
+[data-theme="dark"] .why-choose-content h2,
+[data-theme="dark"] .why-feature h4,
+[data-theme="dark"] .section-header h2,
+[data-theme="dark"] .contact-info-card h3,
+[data-theme="dark"] .form-header h2,
+[data-theme="dark"] .contact-form label,
+[data-theme="dark"] .sidebar-card h3,
+[data-theme="dark"] .broker-info h4,
+[data-theme="dark"] .faq-question span,
+[data-theme="dark"] .service-areas h3,
+[data-theme="dark"] .area-tag {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .overview-content p,
+[data-theme="dark"] .service-intro,
+[data-theme="dark"] .feature p,
+[data-theme="dark"] .about-story-content p,
+[data-theme="dark"] .team-intro,
+[data-theme="dark"] .credential p,
+[data-theme="dark"] .value-card p,
+[data-theme="dark"] .why-choose-content .lead,
+[data-theme="dark"] .why-feature p,
+[data-theme="dark"] .section-header p,
+[data-theme="dark"] .contact-info-card p,
+[data-theme="dark"] .form-header p,
+[data-theme="dark"] .sidebar-card p,
+[data-theme="dark"] .sidebar-features li,
+[data-theme="dark"] .faq-answer p,
+[data-theme="dark"] .result-note {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .calc-form input,
+[data-theme="dark"] .calc-form select,
+[data-theme="dark"] .contact-form input,
+[data-theme="dark"] .contact-form select,
+[data-theme="dark"] .contact-form textarea {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: #ffffff;
+}
+
+[data-theme="dark"] .calc-form input::placeholder,
+[data-theme="dark"] .contact-form input::placeholder,
+[data-theme="dark"] .contact-form textarea::placeholder {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .area-tag {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .area-tag:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+}
+
+[data-theme="dark"] .lender-logo {
+    background: var(--card-bg);
+}
+
+[data-theme="dark"] .lender-logo img {
+    filter: grayscale(30%) brightness(1.1);
+    opacity: 0.9;
+}
+
+[data-theme="dark"] .lender-logo:hover img {
+    filter: grayscale(0) brightness(1.1);
+    opacity: 1;
+}
+
+/* ==========================================
    PAGE HERO SECTION
    ========================================== */
 .page-hero {
