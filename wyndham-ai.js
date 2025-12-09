@@ -5,8 +5,8 @@
 
 // Configuration - UPDATE THIS with your backend URL
 const WYNDHAM_AI_WS_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'ws://localhost:3001'  // Local development
-    : 'wss://your-backend-domain.com';  // UPDATE: Your production backend URL
+    ? 'ws://localhost:5013'  // Local development
+    : 'wss://wyndham.devshubh.me';  // Production backend URL
 
 // State
 let wyndhamWs = null;
