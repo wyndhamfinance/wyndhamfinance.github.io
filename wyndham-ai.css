@@ -1,0 +1,268 @@
+/* Wyndham AI Widget - Branded for Wyndham Financial Group */
+
+.wyndham-ai-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Widget Panel - Horizontal Layout */
+.wyndham-widget-panel {
+    background: linear-gradient(135deg, #1a1a2e 0%, #252540 100%);
+    border-radius: 50px;
+    box-shadow: 0 4px 25px rgba(232, 131, 42, 0.3);
+    padding: 10px 20px 10px 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: wyndhamSlideUp 0.4s ease;
+    border: 2px solid rgba(232, 131, 42, 0.3);
+}
+
+@keyframes wyndhamSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.wyndham-widget-panel:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 35px rgba(232, 131, 42, 0.4);
+    border-color: rgba(232, 131, 42, 0.6);
+}
+
+/* Visualizer Container */
+.wyndham-visualizer-container {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+#wyndhamVisualizer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+}
+
+.wyndham-orb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8832a 0%, #f5a54a 50%, #d46e1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(232, 131, 42, 0.5);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.wyndham-orb.listening {
+    animation: wyndhamPulse 2s infinite;
+    box-shadow: 0 0 25px rgba(232, 131, 42, 0.7);
+}
+
+.wyndham-orb.speaking {
+    animation: wyndhamPulseFast 0.8s infinite;
+    box-shadow: 0 0 30px rgba(245, 165, 74, 0.8);
+}
+
+@keyframes wyndhamPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.08); }
+}
+
+@keyframes wyndhamPulseFast {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.12); }
+}
+
+.wyndham-orb-inner {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wyndham-orb-inner svg {
+    width: 18px;
+    height: 18px;
+    fill: white;
+}
+
+/* Widget Content */
+.wyndham-widget-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.wyndham-widget-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    flex: 1;
+}
+
+.wyndham-widget-text span {
+    color: #e8832a;
+}
+
+/* Mute Button */
+.wyndham-mute-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+}
+
+.wyndham-mute-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.wyndham-mute-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.wyndham-mute-btn.muted svg {
+    stroke: #ff4b4b;
+}
+
+.wyndham-mute-btn.muted:hover {
+    background: rgba(255, 75, 75, 0.2);
+}
+
+/* End Button */
+.wyndham-end-btn {
+    background: transparent;
+    color: #ff6b6b;
+    border: 2px solid #ff6b6b;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.wyndham-end-btn svg {
+    width: 14px;
+    height: 14px;
+    stroke: #ff6b6b;
+}
+
+.wyndham-end-btn:hover {
+    background: #ff6b6b;
+    color: white;
+    transform: scale(1.05);
+}
+
+.wyndham-end-btn:hover svg {
+    stroke: white;
+}
+
+/* Minimized State - Just the orb */
+.wyndham-widget-minimized {
+    display: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8832a 0%, #f5a54a 100%);
+    box-shadow: 0 4px 20px rgba(232, 131, 42, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-items: center;
+    justify-content: center;
+}
+
+.wyndham-widget-minimized:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(232, 131, 42, 0.6);
+}
+
+.wyndham-widget-minimized svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 480px) {
+    .wyndham-ai-widget {
+        right: 15px;
+        bottom: 80px; /* Above scroll-to-top button */
+    }
+
+    .wyndham-widget-panel {
+        padding: 8px 16px 8px 8px;
+        gap: 10px;
+    }
+
+    .wyndham-visualizer-container {
+        width: 45px;
+        height: 45px;
+    }
+
+    #wyndhamVisualizer {
+        width: 45px;
+        height: 45px;
+    }
+
+    .wyndham-orb {
+        width: 38px;
+        height: 38px;
+    }
+
+    .wyndham-orb-inner {
+        width: 28px;
+        height: 28px;
+    }
+
+    .wyndham-widget-text {
+        font-size: 13px;
+    }
+
+    .wyndham-end-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .wyndham-widget-panel {
+    background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 100%);
+}
