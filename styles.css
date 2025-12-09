@@ -272,6 +272,7 @@ img {
 .nav-actions {
     display: flex;
     align-items: center;
+    gap: 15px;
 }
 
 /* Phone Button */
@@ -290,51 +291,6 @@ img {
 .phone-btn:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
-}
-
-/* Nav Right Container */
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* Nav Item */
-.nav-item {
-    position: relative;
-}
-
-.nav-item.dropdown {
-    position: relative;
-}
-
-.nav-item.dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-/* Contact Link Button Style */
-.contact-link {
-    background: var(--primary-color);
-    color: #ffffff !important;
-    padding: 10px 20px !important;
-    border-radius: 50px;
-}
-
-.contact-link:hover {
-    background: var(--primary-dark);
-    color: #ffffff !important;
-}
-
-/* Hamburger Bar Styles */
-.hamburger .bar {
-    width: 25px;
-    height: 3px;
-    background: var(--text-dark);
-    border-radius: 3px;
-    transition: var(--transition);
-    display: block;
 }
 
 /* Hamburger Menu */
@@ -1359,10 +1315,19 @@ section h2 {
     
     .nav-actions {
         display: flex;
+        order: 2;
+    }
+    
+    .hamburger {
+        order: 3;
     }
     
     .theme-toggle {
-        margin-right: 10px;
+        margin-right: 0;
+    }
+    
+    .navbar {
+        position: relative;
     }
     
     .hero h1 {
@@ -1467,9 +1432,64 @@ section h2 {
     
     .logo img {
         height: 40px;
+        width: auto;
     }
     
     .logo {
         padding: 6px 10px;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    section {
+        padding: 50px 0;
+    }
+    
+    .hero {
+        min-height: auto;
+        padding: 120px 0 60px;
+    }
+    
+    .hero-rating {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .experience-card {
+        padding: 20px 15px;
+    }
+    
+    .experience-card h3 {
+        font-size: 22px;
+    }
+    
+    .service-card {
+        padding: 25px 20px;
+    }
+    
+    .tool-card {
+        padding: 25px 20px;
+    }
+    
+    .review-card {
+        padding: 20px;
+    }
+    
+    .contact-form-wrapper {
+        padding: 25px 20px;
+    }
+    
+    .contact-form-wrapper h2 {
+        font-size: 24px;
+    }
+    
+    section h2 {
+        font-size: 26px;
+    }
+    
+    .footer-brand p {
+        font-size: 14px;
     }
 }
