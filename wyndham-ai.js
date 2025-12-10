@@ -351,7 +351,7 @@ async function processWyndhamAudioQueue() {
             const currentTime = wyndhamPlaybackContext.currentTime;
             const hasActiveAudio = wyndhamScheduledSources.some(item => item.endTime > currentTime);
             if (hasActiveAudio) {
-                setTimeout(() => processWyndhamAudioQueue(), 100);
+                setTimeout(() => processWyndhamAudioQueue(), 50);
                 return;
             }
         }
@@ -396,8 +396,8 @@ async function processWyndhamAudioQueue() {
         console.error('Audio decode error:', error);
     }
     
-    // Continue processing queue
-    setTimeout(() => processWyndhamAudioQueue(), 20);
+    // Continue processing queue faster
+    setTimeout(() => processWyndhamAudioQueue(), 5);
 }
 
 function scheduleWyndhamAudioBuffer(audioBuffer) {
@@ -410,9 +410,9 @@ function scheduleWyndhamAudioBuffer(audioBuffer) {
     const currentTime = wyndhamPlaybackContext.currentTime;
     
     // IMPORTANT: Schedule audio sequentially, not overlapping
-    // If nextPlayTime is in the past or not set, start from now with small buffer
+    // If nextPlayTime is in the past or not set, start from now with minimal buffer
     if (wyndhamNextPlayTime <= currentTime) {
-        wyndhamNextPlayTime = currentTime + 0.05; // 50ms buffer for mobile
+        wyndhamNextPlayTime = currentTime + 0.01; // Reduced from 50ms to 10ms
     }
     
     const scheduleTime = wyndhamNextPlayTime;
@@ -433,8 +433,8 @@ function scheduleWyndhamAudioBuffer(audioBuffer) {
         endTime: endTime
     });
     
-    // IMPORTANT: Next audio should start AFTER this one ends (with tiny gap for mobile)
-    wyndhamNextPlayTime = endTime + (wyndhamIsMobile ? 0.01 : 0.005);
+    // IMPORTANT: Next audio should start right after this one ends (minimal gap)
+    wyndhamNextPlayTime = endTime; // No gap - seamless playback
     
     // Clean up old finished sources
     wyndhamScheduledSources = wyndhamScheduledSources.filter(item => item.endTime > currentTime);
