@@ -27,6 +27,16 @@ let wyndhamBufferLength = null;
 // Mute state
 let wyndhamIsMuted = false;
 
+// Mobile-optimized audio playback
+let wyndhamPlaybackContext = null;
+let wyndhamNextPlayTime = 0;
+let wyndhamScheduledSources = [];
+let wyndhamAudioBufferQueue = [];
+let wyndhamIsScheduling = false;
+
+// Detect mobile device
+const wyndhamIsMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 // DOM Elements (will be set after widget is added to page)
 let wyndhamWidgetPanel, wyndhamWidgetText, wyndhamMuteBtn, wyndhamEndBtn, wyndhamOrb, wyndhamVisualizer;
 
@@ -307,17 +317,46 @@ function convertWyndhamToPCM16(float32Array) {
     return buffer;
 }
 
-// Audio Playback
+// Audio Playback - Mobile Optimized with Seamless Streaming
 function addWyndhamAudioToQueue(base64Audio) {
     wyndhamAudioQueue.push(base64Audio);
     if (!wyndhamIsPlaying) {
-        playWyndhamNextAudio();
+        processWyndhamAudioQueue();
     }
 }
 
-async function playWyndhamNextAudio() {
+// Initialize persistent playback context (called on user gesture/start)
+async function initWyndhamPlaybackContext() {
+    if (!wyndhamPlaybackContext || wyndhamPlaybackContext.state === 'closed') {
+        wyndhamPlaybackContext = new (window.AudioContext || window.webkitAudioContext)({ 
+            sampleRate: 24000,
+            latencyHint: wyndhamIsMobile ? 'playback' : 'interactive'
+        });
+    }
+    
+    // Resume if suspended (required for mobile browsers after user gesture)
+    if (wyndhamPlaybackContext.state === 'suspended') {
+        await wyndhamPlaybackContext.resume();
+    }
+    
+    wyndhamNextPlayTime = wyndhamPlaybackContext.currentTime;
+    return wyndhamPlaybackContext;
+}
+
+async function processWyndhamAudioQueue() {
     if (wyndhamAudioQueue.length === 0) {
+        // Check if there's still scheduled audio playing
+        if (wyndhamScheduledSources.length > 0) {
+            const currentTime = wyndhamPlaybackContext ? wyndhamPlaybackContext.currentTime : 0;
+            const hasActiveAudio = wyndhamScheduledSources.some(item => item.endTime > currentTime);
+            if (hasActiveAudio) {
+                setTimeout(() => processWyndhamAudioQueue(), 50);
+                return;
+            }
+        }
         wyndhamIsPlaying = false;
+        wyndhamOrb.classList.remove('speaking');
+        wyndhamOrb.classList.add('listening');
         updateWyndhamStatus('Listening...');
         return;
     }
@@ -327,44 +366,96 @@ async function playWyndhamNextAudio() {
     wyndhamOrb.classList.add('speaking');
     updateWyndhamStatus('Speaking...');
 
-    const base64Audio = wyndhamAudioQueue.shift();
+    // Ensure playback context is initialized and resumed
+    await initWyndhamPlaybackContext();
+
+    // Process all available audio chunks for seamless playback
+    while (wyndhamAudioQueue.length > 0) {
+        const base64Audio = wyndhamAudioQueue.shift();
+        
+        try {
+            const binaryString = atob(base64Audio);
+            const bytes = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+
+            // Create audio buffer from PCM16 data
+            const audioBuffer = wyndhamPlaybackContext.createBuffer(1, bytes.length / 2, 24000);
+            const channelData = audioBuffer.getChannelData(0);
+
+            const dataView = new DataView(bytes.buffer);
+            for (let i = 0; i < channelData.length; i++) {
+                const int16 = dataView.getInt16(i * 2, true);
+                channelData[i] = int16 / 32768.0;
+            }
+
+            // Schedule this buffer to play seamlessly after the previous one
+            scheduleWyndhamAudioBuffer(audioBuffer);
+        } catch (error) {
+            console.error('Audio decode error:', error);
+        }
+    }
+    
+    // Continue checking for more audio or completion
+    setTimeout(() => processWyndhamAudioQueue(), 50);
+}
+
+function scheduleWyndhamAudioBuffer(audioBuffer) {
+    if (!wyndhamPlaybackContext || wyndhamPlaybackContext.state === 'closed') return;
+    
+    const source = wyndhamPlaybackContext.createBufferSource();
+    source.buffer = audioBuffer;
+    source.connect(wyndhamPlaybackContext.destination);
+    
+    // Ensure we don't schedule in the past
+    const currentTime = wyndhamPlaybackContext.currentTime;
+    if (wyndhamNextPlayTime < currentTime) {
+        // Add a tiny delay to prevent audio overlap issues on mobile
+        wyndhamNextPlayTime = currentTime + (wyndhamIsMobile ? 0.02 : 0.005);
+    }
+    
+    const scheduleTime = wyndhamNextPlayTime;
     
     try {
-        const binaryString = atob(base64Audio);
-        const bytes = new Uint8Array(binaryString.length);
-        for (let i = 0; i < binaryString.length; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-        }
-
-        const playbackContext = new AudioContext({ sampleRate: 24000 });
-        const audioBuffer = playbackContext.createBuffer(1, bytes.length / 2, 24000);
-        const channelData = audioBuffer.getChannelData(0);
-
-        const dataView = new DataView(bytes.buffer);
-        for (let i = 0; i < channelData.length; i++) {
-            const int16 = dataView.getInt16(i * 2, true);
-            channelData[i] = int16 / 32768.0;
-        }
-
-        const source = playbackContext.createBufferSource();
-        source.buffer = audioBuffer;
-        source.connect(playbackContext.destination);
-        
-        source.onended = () => {
-            playbackContext.close();
-            playWyndhamNextAudio();
-        };
-
-        source.start();
-    } catch (error) {
-        console.error('Audio playback error:', error);
-        playWyndhamNextAudio();
+        source.start(scheduleTime);
+    } catch (e) {
+        console.error('Audio start error:', e);
+        return;
     }
+    
+    // Track scheduled source for cleanup
+    const sourceInfo = {
+        source: source,
+        endTime: scheduleTime + audioBuffer.duration
+    };
+    wyndhamScheduledSources.push(sourceInfo);
+    
+    // Update next play time (with tiny overlap for seamless audio)
+    wyndhamNextPlayTime = scheduleTime + audioBuffer.duration - 0.01;
+    
+    // Clean up finished sources periodically
+    wyndhamScheduledSources = wyndhamScheduledSources.filter(item => item.endTime > currentTime - 1);
 }
 
 function stopWyndhamAudioPlayback() {
     wyndhamAudioQueue = [];
     wyndhamIsPlaying = false;
+    
+    // Stop all scheduled sources
+    wyndhamScheduledSources.forEach(item => {
+        try {
+            item.source.stop();
+        } catch (e) {
+            // Source may already be stopped
+        }
+    });
+    wyndhamScheduledSources = [];
+    
+    // Reset next play time
+    if (wyndhamPlaybackContext) {
+        wyndhamNextPlayTime = wyndhamPlaybackContext.currentTime;
+    }
 }
 
 // Visualization
@@ -436,6 +527,10 @@ async function handleWyndhamStartClick() {
         updateWyndhamStatus('Connecting...');
         wyndhamMuteBtn.style.display = 'none';
         wyndhamEndBtn.style.display = 'none';
+        
+        // Initialize playback context on user gesture (required for mobile)
+        await initWyndhamPlaybackContext();
+        
         await connectToWyndhamBackend();
         await startWyndhamMicrophone();
         updateWyndhamStatus('Listening...');
@@ -458,6 +553,12 @@ function handleWyndhamEndClick(e) {
     if (wyndhamWs) {
         wyndhamWs.close();
     }
+    
+    // Close playback context on mobile to save resources
+    if (wyndhamPlaybackContext && wyndhamPlaybackContext.state !== 'closed') {
+        wyndhamPlaybackContext.close();
+        wyndhamPlaybackContext = null;
+    }
 
     wyndhamOrb.classList.remove('listening', 'speaking');
     wyndhamWidgetText.innerHTML = 'Talk to <span>Wyndham AI</span>';
@@ -479,3 +580,26 @@ if (document.readyState === 'loading') {
 } else {
     initWyndhamAI();
 }
+
+// Handle page visibility changes (mobile browsers suspend audio when app is backgrounded)
+document.addEventListener('visibilitychange', async () => {
+    if (document.visibilityState === 'visible' && wyndhamIsConnected) {
+        // Resume audio context when page becomes visible again
+        if (wyndhamPlaybackContext && wyndhamPlaybackContext.state === 'suspended') {
+            try {
+                await wyndhamPlaybackContext.resume();
+                console.log('Playback context resumed after visibility change');
+            } catch (e) {
+                console.error('Failed to resume playback context:', e);
+            }
+        }
+        if (wyndhamAudioContext && wyndhamAudioContext.state === 'suspended') {
+            try {
+                await wyndhamAudioContext.resume();
+                console.log('Audio context resumed after visibility change');
+            } catch (e) {
+                console.error('Failed to resume audio context:', e);
+            }
+        }
+    }
+});
