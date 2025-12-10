@@ -332,6 +332,8 @@ async function initWyndhamPlaybackContext() {
             sampleRate: 24000,
             latencyHint: wyndhamIsMobile ? 'playback' : 'interactive'
         });
+        // Reset the play time when creating new context
+        wyndhamNextPlayTime = 0;
     }
     
     // Resume if suspended (required for mobile browsers after user gesture)
@@ -339,18 +341,17 @@ async function initWyndhamPlaybackContext() {
         await wyndhamPlaybackContext.resume();
     }
     
-    wyndhamNextPlayTime = wyndhamPlaybackContext.currentTime;
     return wyndhamPlaybackContext;
 }
 
 async function processWyndhamAudioQueue() {
     if (wyndhamAudioQueue.length === 0) {
         // Check if there's still scheduled audio playing
-        if (wyndhamScheduledSources.length > 0) {
-            const currentTime = wyndhamPlaybackContext ? wyndhamPlaybackContext.currentTime : 0;
+        if (wyndhamScheduledSources.length > 0 && wyndhamPlaybackContext) {
+            const currentTime = wyndhamPlaybackContext.currentTime;
             const hasActiveAudio = wyndhamScheduledSources.some(item => item.endTime > currentTime);
             if (hasActiveAudio) {
-                setTimeout(() => processWyndhamAudioQueue(), 50);
+                setTimeout(() => processWyndhamAudioQueue(), 100);
                 return;
             }
         }
@@ -369,36 +370,34 @@ async function processWyndhamAudioQueue() {
     // Ensure playback context is initialized and resumed
     await initWyndhamPlaybackContext();
 
-    // Process all available audio chunks for seamless playback
-    while (wyndhamAudioQueue.length > 0) {
-        const base64Audio = wyndhamAudioQueue.shift();
-        
-        try {
-            const binaryString = atob(base64Audio);
-            const bytes = new Uint8Array(binaryString.length);
-            for (let i = 0; i < binaryString.length; i++) {
-                bytes[i] = binaryString.charCodeAt(i);
-            }
-
-            // Create audio buffer from PCM16 data
-            const audioBuffer = wyndhamPlaybackContext.createBuffer(1, bytes.length / 2, 24000);
-            const channelData = audioBuffer.getChannelData(0);
-
-            const dataView = new DataView(bytes.buffer);
-            for (let i = 0; i < channelData.length; i++) {
-                const int16 = dataView.getInt16(i * 2, true);
-                channelData[i] = int16 / 32768.0;
-            }
-
-            // Schedule this buffer to play seamlessly after the previous one
-            scheduleWyndhamAudioBuffer(audioBuffer);
-        } catch (error) {
-            console.error('Audio decode error:', error);
+    // Process ONE audio chunk at a time, then schedule next check
+    const base64Audio = wyndhamAudioQueue.shift();
+    
+    try {
+        const binaryString = atob(base64Audio);
+        const bytes = new Uint8Array(binaryString.length);
+        for (let i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
         }
+
+        // Create audio buffer from PCM16 data
+        const audioBuffer = wyndhamPlaybackContext.createBuffer(1, bytes.length / 2, 24000);
+        const channelData = audioBuffer.getChannelData(0);
+
+        const dataView = new DataView(bytes.buffer);
+        for (let i = 0; i < channelData.length; i++) {
+            const int16 = dataView.getInt16(i * 2, true);
+            channelData[i] = int16 / 32768.0;
+        }
+
+        // Schedule this buffer to play after the previous one finishes
+        scheduleWyndhamAudioBuffer(audioBuffer);
+    } catch (error) {
+        console.error('Audio decode error:', error);
     }
     
-    // Continue checking for more audio or completion
-    setTimeout(() => processWyndhamAudioQueue(), 50);
+    // Continue processing queue
+    setTimeout(() => processWyndhamAudioQueue(), 20);
 }
 
 function scheduleWyndhamAudioBuffer(audioBuffer) {
@@ -408,11 +407,12 @@ function scheduleWyndhamAudioBuffer(audioBuffer) {
     source.buffer = audioBuffer;
     source.connect(wyndhamPlaybackContext.destination);
     
-    // Ensure we don't schedule in the past
     const currentTime = wyndhamPlaybackContext.currentTime;
-    if (wyndhamNextPlayTime < currentTime) {
-        // Add a tiny delay to prevent audio overlap issues on mobile
-        wyndhamNextPlayTime = currentTime + (wyndhamIsMobile ? 0.02 : 0.005);
+    
+    // IMPORTANT: Schedule audio sequentially, not overlapping
+    // If nextPlayTime is in the past or not set, start from now with small buffer
+    if (wyndhamNextPlayTime <= currentTime) {
+        wyndhamNextPlayTime = currentTime + 0.05; // 50ms buffer for mobile
     }
     
     const scheduleTime = wyndhamNextPlayTime;
@@ -424,18 +424,20 @@ function scheduleWyndhamAudioBuffer(audioBuffer) {
         return;
     }
     
+    // Calculate when this buffer will END
+    const endTime = scheduleTime + audioBuffer.duration;
+    
     // Track scheduled source for cleanup
-    const sourceInfo = {
+    wyndhamScheduledSources.push({
         source: source,
-        endTime: scheduleTime + audioBuffer.duration
-    };
-    wyndhamScheduledSources.push(sourceInfo);
+        endTime: endTime
+    });
     
-    // Update next play time (with tiny overlap for seamless audio)
-    wyndhamNextPlayTime = scheduleTime + audioBuffer.duration - 0.01;
+    // IMPORTANT: Next audio should start AFTER this one ends (with tiny gap for mobile)
+    wyndhamNextPlayTime = endTime + (wyndhamIsMobile ? 0.01 : 0.005);
     
-    // Clean up finished sources periodically
-    wyndhamScheduledSources = wyndhamScheduledSources.filter(item => item.endTime > currentTime - 1);
+    // Clean up old finished sources
+    wyndhamScheduledSources = wyndhamScheduledSources.filter(item => item.endTime > currentTime);
 }
 
 function stopWyndhamAudioPlayback() {
