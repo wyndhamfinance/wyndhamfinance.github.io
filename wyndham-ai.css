@@ -223,8 +223,9 @@
 /* Mobile Responsive */
 @media screen and (max-width: 480px) {
     .wyndham-ai-widget {
-        right: 15px;
-        bottom: 80px; /* Above scroll-to-top button */
+        left: 15px;
+        right: auto;
+        bottom: 20px;
     }
 
     .wyndham-widget-panel {

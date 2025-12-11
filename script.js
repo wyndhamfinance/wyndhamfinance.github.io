@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     // DARK MODE TOGGLE
     // ==========================================
-    const themeToggle = document.getElementById('theme-toggle') || document.getElementById('themeToggle');
+    const themeToggle = document.getElementById('themeToggle');
     const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
     
     // Check for saved theme preference or default to light
@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollTopBtn.style.cssText = `
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        right: 280px;
         width: 50px;
         height: 50px;
         background: #e8832a;
@@ -341,6 +341,18 @@ document.addEventListener('DOMContentLoaded', function() {
         z-index: 999;
     `;
     document.body.appendChild(scrollTopBtn);
+    
+    // Add responsive styles for scroll-to-top button
+    const scrollTopStyles = document.createElement('style');
+    scrollTopStyles.textContent = `
+        @media screen and (max-width: 768px) {
+            .scroll-top-btn {
+                right: 20px !important;
+                bottom: 20px !important;
+            }
+        }
+    `;
+    document.head.appendChild(scrollTopStyles);
     
     scrollTopBtn.addEventListener('click', function() {
         window.scrollTo({
