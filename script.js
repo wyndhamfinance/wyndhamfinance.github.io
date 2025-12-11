@@ -348,7 +348,8 @@ document.addEventListener('DOMContentLoaded', function() {
         @media screen and (max-width: 768px) {
             .scroll-top-btn {
                 right: 20px !important;
-                bottom: 20px !important;
+                bottom: 100px !important;
+                z-index: 10001 !important;
             }
         }
     `;

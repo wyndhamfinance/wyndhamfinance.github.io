@@ -248,17 +248,14 @@
     color: var(--text-muted);
     font-weight: 600;
     font-size: 14px;
+    z-index: 1;
+    pointer-events: none;
 }
 
-/* Add four non-breaking spaces after the currency symbol to ensure spacing from the input value */
-.input-icon span::after {
-    content: '\00a0\00a0\00a0\00a0';
-    display: inline-block;
-    width: 1px; /* preserves layout without affecting alignment */
-}
-
-.input-icon input {
-    padding-left: 55px; /* increased from 35px to accommodate symbol + spacing */
+/* Input fields with currency/percent symbols need extra left padding */
+.input-icon input,
+.calc-form .input-icon input {
+    padding-left: 45px !important; /* Space for $ or % symbol */
 }
 
 .calc-form input,
