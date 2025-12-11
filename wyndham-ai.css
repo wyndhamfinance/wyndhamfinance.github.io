@@ -223,9 +223,10 @@
 /* Mobile Responsive */
 @media screen and (max-width: 480px) {
     .wyndham-ai-widget {
-        left: 15px;
-        right: auto;
-        bottom: 20px;
+        right: 15px;
+        left: auto;
+        bottom: 20px; /* Keep widget near bottom */
+        z-index: 10000;
     }
 
     .wyndham-widget-panel {

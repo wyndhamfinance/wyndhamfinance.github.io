@@ -31,7 +31,7 @@ function calculateBorrowing() {
     const maxMonthlyRepayment = Math.min(availableIncome * 0.8, monthlyIncome * 0.35);
 
     if (maxMonthlyRepayment <= 0) {
-        document.getElementById('borrowingValue').textContent = '$0';
+        document.getElementById('borrowingValue').textContent = '$    0';
         document.getElementById('borrowingResult').style.display = 'block';
         return;
     }
@@ -364,9 +364,9 @@ function calculateExtraRepayment() {
 // ==========================================
 function formatCurrency(amount) {
     if (isNaN(amount) || amount < 0) {
-        return '$0';
+        return '$    0';
     }
-    return '$' + Math.round(amount).toLocaleString('en-AU');
+    return '$    ' + Math.round(amount).toLocaleString('en-AU');
 }
 
 function scrollToResult(resultId) {
